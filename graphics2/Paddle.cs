@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace graphics2
 {
-    internal class Ball
+    internal class Paddle
     {
         static public Form1 mainForm;
 
@@ -14,24 +14,23 @@ namespace graphics2
         private int _x;
         private int _y;
         private int _width = 15;
-        private int _height = 15;
-        private int _xSpeed = 6;
-        private int _ySpeed = 6;
+        private int _height = 100;
+        private int _xSpeed = 0;
+        private int _ySpeed = 0;
         private Brush _brush = Brushes.White;
 
         // constructor
-        public Ball(int x,int y)
+        public Paddle(int x,int y)
         {
             _x = x;
             _y = y;
 
         }
         //public properties
-        public int X { get { return _x; } }
+        public int X { get { return _x; } set { _x = value; } }
         public int Y { get { return _y; } }
         public int Width { get { return _width; } }
         public int Height { get { return _height; } }
-        public int xSpeed { get { return _xSpeed; } set { _xSpeed = value; } }
 
         // public methods
         public void Draw(Graphics gr)
@@ -40,22 +39,30 @@ namespace graphics2
             _y += _ySpeed;
 
             if (_x+_width > mainForm.ClientSize.Width)
-                _xSpeed *= -1;
+                _x = mainForm.ClientSize.Width - _width;
 
             if (_x <=0)
-                _xSpeed *= -1;
+                _x = 0;
 
             if (_y + _height > mainForm.ClientSize.Height)
-                _ySpeed *= -1;
+                _y = mainForm.ClientSize.Height - _height;
 
             if (_y <= 0)
-                _ySpeed *= -1;
+                _y = 0;
 
-
-            gr.FillEllipse(_brush, _x, _y, _width, _height);
-            
+            gr.FillRectangle(_brush, _x, _y, _width, _height);
         }
 
+        public void BallCollisionLeft(Paddle paddle, Ball ball)
+        {
+            if(ball.X <= paddle.X + paddle.Width)
+            ball.xSpeed *= -1;
+        }
+        public void BallCollisionRight(Paddle paddle, Ball ball)
+        {
+            if (ball.X + ball.Width >= paddle.X)
+                ball.xSpeed *= -1;
+        }
 
     }
 }
