@@ -39,22 +39,36 @@ namespace graphics2
             _x += _xSpeed;
             _y += _ySpeed;
 
-            if (_x + _width > mainForm.ClientSize.Width)
-                _xSpeed *= -1;
+            /////////////////////////////////////////////////Boundary Collisions/////////////////////////////////////////////////
 
-            if (_x <= 0)
+            if (_x + _width > mainForm.ClientSize.Width)
+            {
+                _x = mainForm.ClientSize.Width - _width;
                 _xSpeed *= -1;
+            }
+                
+            if (_x <= 0)
+            {
+                _x = 0;
+                _xSpeed *= -1;
+            }
 
             if (_y + _height > mainForm.ClientSize.Height)
+            {
+                _y = mainForm.ClientSize.Height - _height;
                 _ySpeed *= -1;
+            }
 
             if (_y <= 0)
+            {
+                _y = 0;
                 _ySpeed *= -1;
+            }
+
+            /////////////////////////////////////////////////Boundary Collisions/////////////////////////////////////////////////
 
             gr.FillEllipse(_brush, _x, _y, _width, _height);
             
         }
-
-
     }
 }
