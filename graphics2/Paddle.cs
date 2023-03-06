@@ -70,11 +70,12 @@ namespace graphics2
             if (ball.X + ball.Width >= paddle.X && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
                 ball.xSpeed *= -1;
                 ball.X -= ball.xSpeed;
-
-            
-
         }
-
+        public double GetCenter(Paddle paddle)
+        {
+            double half = paddle.Height / 2;
+            return half;
+        }
         public void BallCollisionUp(Paddle paddle, Ball ball)
         {
             

@@ -74,10 +74,10 @@ namespace graphics2
 
         public double GetFirstQuarterHeight(Ball ball)
         {
-            double quarter = ball.Height / 4;
+            double quarter = ball.Height / 4;                                 //Functions to more accurately and easily comprehend math calcs for collision.
             return quarter;
         }
-        public double GetHalfHeight(Ball ball)
+        public double GetCenter(Ball ball)
         {
             double half = ball.Height / 2;
             return half;
