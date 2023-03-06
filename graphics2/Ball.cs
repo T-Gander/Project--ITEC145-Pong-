@@ -39,10 +39,10 @@ namespace graphics2
             _x += _xSpeed;
             _y += _ySpeed;
 
-            if (_x+_width > mainForm.ClientSize.Width)
+            if (_x + _width > mainForm.ClientSize.Width)
                 _xSpeed *= -1;
 
-            if (_x <=0)
+            if (_x <= 0)
                 _xSpeed *= -1;
 
             if (_y + _height > mainForm.ClientSize.Height)
@@ -50,7 +50,6 @@ namespace graphics2
 
             if (_y <= 0)
                 _ySpeed *= -1;
-
 
             gr.FillEllipse(_brush, _x, _y, _width, _height);
             
