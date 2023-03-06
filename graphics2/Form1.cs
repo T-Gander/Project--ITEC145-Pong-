@@ -42,6 +42,9 @@ namespace graphics2
 
             paddle1.BallCollisionLeft(paddle1, ball);
             paddle2.BallCollisionRight(paddle2, ball);
+
+            //Add key commands here
+
         }
 
         
