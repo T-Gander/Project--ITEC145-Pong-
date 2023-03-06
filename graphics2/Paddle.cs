@@ -55,12 +55,14 @@ namespace graphics2
 
         public void BallCollisionLeft(Paddle paddle, Ball ball)
         {
-            if(ball.X <= paddle.X + paddle.Width && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
-            ball.xSpeed *= -1;
+            if (ball.X <= paddle.X + paddle.Width && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
+                
+                ball.xSpeed *= -1;
         }
         public void BallCollisionRight(Paddle paddle, Ball ball)
         {
             if (ball.X + ball.Width >= paddle.X && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
+                
                 ball.xSpeed *= -1;
         }
 

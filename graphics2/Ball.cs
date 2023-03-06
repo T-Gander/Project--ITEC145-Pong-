@@ -27,8 +27,8 @@ namespace graphics2
 
         }
         //public properties
-        public int X { get { return _x; } }
-        public int Y { get { return _y; } }
+        public int X { get { return _x; } set { _x = value; } }
+        public int Y { get { return _y; } set { _y = value; } }
         public int Width { get { return _width; } }
         public int Height { get { return _height; } }
         public int xSpeed { get { return _xSpeed; } set { _xSpeed = value; } }
