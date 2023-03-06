@@ -58,12 +58,30 @@ namespace graphics2
             if (ball.X <= paddle.X + paddle.Width && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
                 ball.xSpeed *= -1;
                 ball.X += ball.xSpeed;
+
+            //if (ball.X < paddle.X + paddle.Width && ball.Y >= paddle.Y - ball.Height)
+            //{
+            //    ball.ySpeed *= -1;
+            //    ball.Y = paddle.Y + ball.Height;
+            //}
         }
         public void BallCollisionRight(Paddle paddle, Ball ball)
         {
             if (ball.X + ball.Width >= paddle.X && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
                 ball.xSpeed *= -1;
                 ball.X -= ball.xSpeed;
+
+            
+
+        }
+
+        public void BallCollisionUp(Paddle paddle, Ball ball)
+        {
+            
+        }
+        public void BallCollisionDown(Paddle paddle, Ball ball)
+        {
+
         }
 
     }

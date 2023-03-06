@@ -18,6 +18,7 @@ namespace graphics2
         private int _xSpeed = 6;
         private int _ySpeed = 6;
         private Brush _brush = Brushes.White;
+        
 
         // constructor
         public Ball(int x,int y)
@@ -30,8 +31,9 @@ namespace graphics2
         public int X { get { return _x; } set { _x = value; } }
         public int Y { get { return _y; } set { _y = value; } }
         public int Width { get { return _width; } }
-        public int Height { get { return _height; } }
+        public int Height { get { return _height; } set { _height = value; } }
         public int xSpeed { get { return _xSpeed; } set { _xSpeed = value; } }
+        public int ySpeed { get { return _ySpeed; } set { _ySpeed = value; } }
 
         // public methods
         public void Draw(Graphics gr)
@@ -39,7 +41,7 @@ namespace graphics2
             _x += _xSpeed;
             _y += _ySpeed;
 
-            /////////////////////////////////////////////////Boundary Collisions/////////////////////////////////////////////////
+            /////////////////////////////////////////////////Window Boundary Collisions/////////////////////////////////////////////////
 
             if (_x + _width > mainForm.ClientSize.Width)
             {
@@ -65,10 +67,26 @@ namespace graphics2
                 _ySpeed *= -1;
             }
 
-            /////////////////////////////////////////////////Boundary Collisions/////////////////////////////////////////////////
+            /////////////////////////////////////////////////Window Boundary Collisions/////////////////////////////////////////////////
 
             gr.FillEllipse(_brush, _x, _y, _width, _height);
-            
+        }
+
+        public double GetFirstQuarterHeight(Ball ball)
+        {
+            double quarter = ball.Height / 4;
+            return quarter;
+        }
+        public double GetHalfHeight(Ball ball)
+        {
+            double half = ball.Height / 2;
+            return half;
+        }
+
+        public double GetThirdQuarterHeight(Ball ball)
+        {
+            double quarter = (ball.Height / 4)*3;
+            return quarter;
         }
     }
 }
