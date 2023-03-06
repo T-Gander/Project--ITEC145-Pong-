@@ -71,11 +71,17 @@ namespace graphics2
                 ball.xSpeed *= -1;
                 ball.X -= ball.xSpeed;
         }
-        public double GetCenter(Paddle paddle)
+        public double GetCenterY(Paddle paddle)
         {
             double half = paddle.Height / 2;
-            return half;
+            return half + paddle.Y;
         }
+        public double GetCenterX(Paddle paddle)
+        {
+            double half = paddle.Width / 2;
+            return half + paddle.X;
+        }
+
         public void BallCollisionUp(Paddle paddle, Ball ball)
         {
             

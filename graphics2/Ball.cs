@@ -72,21 +72,21 @@ namespace graphics2
             gr.FillEllipse(_brush, _x, _y, _width, _height);
         }
 
-        public double GetFirstQuarterHeight(Ball ball)
+        public double GetFirstQuarterY(Ball ball)
         {
             double quarter = ball.Height / 4;                                 //Functions to more accurately and easily comprehend math calcs for collision.
-            return quarter;
+            return quarter + ball.Y;
         }
-        public double GetCenter(Ball ball)
+        public double GetCenterY(Ball ball)
         {
             double half = ball.Height / 2;
-            return half;
+            return half + ball.Y;
         }
 
-        public double GetThirdQuarterHeight(Ball ball)
+        public double GetThirdQuarterY(Ball ball)
         {
             double quarter = (ball.Height / 4)*3;
-            return quarter;
+            return quarter + ball.Y;
         }
     }
 }
