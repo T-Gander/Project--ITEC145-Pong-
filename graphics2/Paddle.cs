@@ -69,12 +69,6 @@ namespace graphics2
                     ball.X += ball.xSpeed;
                 }
             }
-
-            //if (ball.X < paddle.X + paddle.Width && ball.Y >= paddle.Y - ball.Height)
-            //{
-            //    ball.ySpeed *= -1;
-            //    ball.Y = paddle.Y + ball.Height;
-            //}
         }
         public void BallCollisionPlayer2(Paddle paddle, Ball ball)
         {
