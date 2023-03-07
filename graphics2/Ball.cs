@@ -19,7 +19,6 @@ namespace graphics2
         private int _ySpeed = 6;
         private Brush _brush = Brushes.White;
         
-
         // constructor
         public Ball(int x,int y)
         {
@@ -34,6 +33,7 @@ namespace graphics2
         public int Height { get { return _height; } set { _height = value; } }
         public int xSpeed { get { return _xSpeed; } set { _xSpeed = value; } }
         public int ySpeed { get { return _ySpeed; } set { _ySpeed = value; } }
+        
 
         // public methods
         public void Draw(Graphics gr)
@@ -42,18 +42,6 @@ namespace graphics2
             _y += _ySpeed;
 
             /////////////////////////////////////////////////Window Boundary Collisions/////////////////////////////////////////////////
-
-            if (_x + _width > mainForm.ClientSize.Width)
-            {
-                _x = mainForm.ClientSize.Width - _width;
-                _xSpeed *= -1;
-            }
-                
-            if (_x <= 0)
-            {
-                _x = 0;
-                _xSpeed *= -1;
-            }
 
             if (_y + _height > mainForm.ClientSize.Height)
             {
@@ -98,11 +86,15 @@ namespace graphics2
             double half = ball.Width / 2;
             return half + ball.X;
         }
-
         public double GetThirdQuarterX(Ball ball)
         {
             double quarter = (ball.Width / 4) * 3;
             return quarter + ball.X;
+        }
+        public void Reset(Ball ball)
+        {
+            ball.X = mainForm.ClientSize.Width / 2;
+            ball.Y = mainForm.ClientSize.Height / 2;
         }
     }
 }

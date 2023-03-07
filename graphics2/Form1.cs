@@ -1,4 +1,5 @@
 using System.Security.Cryptography.X509Certificates;
+using static graphics2.Ball;
 
 namespace graphics2
 {
@@ -7,6 +8,9 @@ namespace graphics2
         Ball ball;
         Paddle paddle1;
         Paddle paddle2;
+        public int player1Score = 0;
+        public int player2Score = 0;
+        bool GameEnd = false;
 
         public Form1()
         {
@@ -38,13 +42,33 @@ namespace graphics2
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Invalidate(false);   // this will force the Paint event to fire
+            if(GameEnd == true)
+            {
+                Thread.Sleep(2000);     //Sorry for this, I know it's bad programming...
+                GameEnd = false;
+            }
 
             paddle1.X = 30;
             paddle2.X = ClientSize.Width - 45;
 
             paddle1.BallCollisionLeft(paddle1, ball);
             paddle2.BallCollisionRight(paddle2, ball);
-            
+
+            if (ball.X + ball.Width > mainForm.ClientSize.Width)
+            {
+                player1Score++;
+                //Reset and player 1 gains a point
+                ball.Reset(ball);
+                GameEnd = true;
+            }
+
+            if (ball.X <= 0)
+            {
+                player2Score++;
+                //Reset and player 2 gains a point
+                ball.Reset(ball);
+                GameEnd = true;
+            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

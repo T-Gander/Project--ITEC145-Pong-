@@ -36,14 +36,7 @@ namespace graphics2
         // public methods
         public void Draw(Graphics gr)
         {
-            _x += _xSpeed;
             _y += _ySpeed;
-
-            if (_x+_width > mainForm.ClientSize.Width)
-                _x = mainForm.ClientSize.Width - _width;
-
-            if (_x <=0)
-                _x = 0;
 
             if (_y + _height > mainForm.ClientSize.Height)
                 _y = mainForm.ClientSize.Height - _height;
