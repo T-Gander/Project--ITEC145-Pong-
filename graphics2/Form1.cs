@@ -8,9 +8,25 @@ namespace graphics2
         Ball ball;
         Paddle paddle1;
         Paddle paddle2;
+        IScore Iplayer1Score;
+        IScore Iplayer2Score;
+
+        enum PaddleState
+        {
+            PaddleUp,
+            PaddleDown,
+            None
+        }
+
+        PaddleState Paddle1State = PaddleState.None;
+        PaddleState Paddle2State = PaddleState.None;
+
+        int count;
         public int player1Score = 0;
         public int player2Score = 0;
         bool GameEnd = false;
+        int currentxSpeed;
+        int currentySpeed;
 
         public Form1()
         {
@@ -30,6 +46,8 @@ namespace graphics2
             ball = new Ball(ClientSize.Width / 2, ClientSize.Height / 2);
             paddle1 = new Paddle(30, ClientSize.Height / 2 - 50);
             paddle2 = new Paddle(ClientSize.Width - 45, ClientSize.Height / 2 - 50);
+            Iplayer1Score = new IScore((ClientSize.Width / 4) - 50, 50, "Player 1", player1Score);          //Theres a better way to line these up but it works good enough
+            Iplayer2Score = new IScore(((ClientSize.Width / 4)-25) * 3, 50, "Player 2", player2Score);
         }
 
         private void Form1_Paint(object? sender, PaintEventArgs e)
@@ -37,20 +55,53 @@ namespace graphics2
             ball.Draw(e.Graphics);
             paddle1.Draw(e.Graphics);
             paddle2.Draw(e.Graphics);
+            Iplayer1Score.Draw(e.Graphics);
+            Iplayer2Score.Draw(e.Graphics);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            this.Invalidate(false);   // this will force the Paint event to fire
-            if(GameEnd == true)
+            if(Paddle1State == PaddleState.PaddleUp)
             {
-                Thread.Sleep(2000);     //Sorry for this, I know it's bad programming...
-                GameEnd = false;
+                paddle1.ySpeed = -5;
+            }
+            else if(Paddle1State == PaddleState.PaddleDown)
+            {
+                paddle1.ySpeed = 5;
+            }
+            else
+            {
+                paddle1.ySpeed = 0;
+            }
+
+            if (Paddle2State == PaddleState.PaddleUp)
+            {
+                paddle2.ySpeed = -5;
+            }
+            else if (Paddle2State == PaddleState.PaddleDown)
+            {
+                paddle2.ySpeed = 5;
+            }
+            else
+            {
+                paddle2.ySpeed = 0;
+            }
+
+            Iplayer1Score.X = (ClientSize.Width / 4) - 50;
+            Iplayer2Score.X = ((ClientSize.Width / 4) - 25) * 3;
+            Iplayer1Score.Score = player1Score;
+            Iplayer2Score.Score = player2Score;
+
+            this.Invalidate(false);   // this will force the Paint event to fire
+
+            if (GameEnd == true)
+            {
+                timerWait.Enabled = true;     //Sorry for this, I know it's bad programming... Also couldn't figure out why score won't refresh before the pause.ti
             }
 
             paddle1.X = 30;
             paddle2.X = ClientSize.Width - 45;
-
+            
             paddle1.BallCollisionPlayer1(paddle1, ball);
             paddle2.BallCollisionPlayer2(paddle2, ball);
 
@@ -76,42 +127,92 @@ namespace graphics2
             //Player 1
             if (e.KeyCode == Keys.W)
             {
-                paddle1.ySpeed = -5;
+                Paddle1State = PaddleState.PaddleUp;
             }
             if (e.KeyCode == Keys.S)
             {
-                paddle1.ySpeed = 5;
+                Paddle1State = PaddleState.PaddleDown;
             }
             //Player 2
             if (e.KeyCode == Keys.Up)
             {
-                paddle2.ySpeed = -5;
+                Paddle2State = PaddleState.PaddleUp;
             }
             if (e.KeyCode == Keys.Down)
             {
-                paddle2.ySpeed = 5;
+                Paddle2State = PaddleState.PaddleDown;
             }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             //Player 1
-            if (e.KeyCode == Keys.W)
+            if (e.KeyCode == Keys.W && Paddle1State != PaddleState.PaddleDown)
             {
-                paddle1.ySpeed = 0;
+                Paddle1State = PaddleState.None;
             }
-            if (e.KeyCode == Keys.S)
+            if (e.KeyCode == Keys.S && Paddle1State != PaddleState.PaddleUp)
             {
-                paddle1.ySpeed = 0;
+                Paddle1State = PaddleState.None;
             }
+
             //Player 2
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.Up && Paddle2State != PaddleState.PaddleDown)
             {
-                paddle2.ySpeed = 0;
+                Paddle2State = PaddleState.None;
             }
-            if (e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Down && Paddle2State != PaddleState.PaddleUp)
             {
-                paddle2.ySpeed = 0;
+                Paddle1State = PaddleState.None;
+            }
+        }
+
+        private void timerWait_Tick(object sender, EventArgs e)
+        {
+            if(GameEnd == true)
+            {
+                currentxSpeed = 0;
+                currentySpeed = 0;
+                GameEnd = false;
+            }
+            else
+            {
+                int newSpeed = 0;
+                ball.xSpeed = newSpeed;
+                ball.ySpeed = newSpeed;
+                count++;
+
+                if (count == 250)
+                {
+                    Random random1 = new Random();
+                    Random random2 = new Random();
+
+                    int randomroll1 = random1.Next(0, 2);
+                    int randomroll2 = random2.Next(0, 2);
+
+                    if(randomroll1 == 1)
+                    {
+                        currentxSpeed = 6;
+                    }
+                    else
+                    {
+                        currentxSpeed = -6;
+                    }
+
+                    if (randomroll2 == 1)
+                    {
+                        currentySpeed = 6;
+                    }
+                    else
+                    {
+                        currentySpeed = -6;
+                    }
+
+                    ball.xSpeed = currentxSpeed;
+                    ball.ySpeed = currentySpeed;
+                    count = 0;
+                    timerWait.Stop();
+                }
             }
         }
     }
