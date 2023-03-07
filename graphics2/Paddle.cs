@@ -31,6 +31,7 @@ namespace graphics2
         public int Y { get { return _y; } }
         public int Width { get { return _width; } }
         public int Height { get { return _height; } }
+        public int ySpeed { get { return _ySpeed; } set { _ySpeed = value; } }
 
         // public methods
         public void Draw(Graphics gr)
@@ -55,9 +56,26 @@ namespace graphics2
 
         public void BallCollisionLeft(Paddle paddle, Ball ball)
         {
-            if (ball.X <= paddle.X + paddle.Width && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
-                ball.xSpeed *= -1;
-                ball.X += ball.xSpeed;
+            if (ball.X <= paddle.X + paddle.Width && ball.GetCenterY(ball) >= paddle.Y && ball.GetCenterY(ball) <= paddle.Y + paddle.Height)
+            {
+                if (ball.GetCenterX(ball) <= paddle.X)
+                {
+                    if(ball.GetCenterY(ball) <= paddle.GetCenterY(paddle))
+                    {
+                        ball.Y = paddle.Y - ball.Height;
+                    }
+                    else
+                    {
+                        ball.Y = paddle.Y + paddle.Height;
+                    }
+                    ball.ySpeed *= -1;
+                }
+                else
+                {
+                    ball.xSpeed *= -1;
+                    ball.X += ball.xSpeed;
+                }
+            }
 
             //if (ball.X < paddle.X + paddle.Width && ball.Y >= paddle.Y - ball.Height)
             //{
@@ -67,9 +85,28 @@ namespace graphics2
         }
         public void BallCollisionRight(Paddle paddle, Ball ball)
         {
-            if (ball.X + ball.Width >= paddle.X && ball.Y >= paddle.Y && ball.Y <= paddle.Y + paddle.Height)
-                ball.xSpeed *= -1;
-                ball.X -= ball.xSpeed;
+            if (ball.X + ball.Width >= paddle.X && ball.GetCenterY(ball) >= paddle.Y && ball.GetCenterY(ball) <= paddle.Y + paddle.Height)
+            {
+                if (ball.GetCenterX(ball) >= paddle.X)
+                {
+                    if (ball.GetCenterY(ball) <= paddle.GetCenterY(paddle))
+                    {
+                        ball.Y = paddle.Y - ball.Height;
+                    }
+                    else
+                    {
+                        ball.Y = paddle.Y + paddle.Height;
+                    }
+                    ball.ySpeed*= -1;
+                }
+                else
+                {
+                    ball.xSpeed *= -1;
+                    ball.X += ball.xSpeed;
+                }
+            }
+
+            
         }
         public double GetCenterY(Paddle paddle)
         {
@@ -80,15 +117,6 @@ namespace graphics2
         {
             double half = paddle.Width / 2;
             return half + paddle.X;
-        }
-
-        public void BallCollisionUp(Paddle paddle, Ball ball)
-        {
-            
-        }
-        public void BallCollisionDown(Paddle paddle, Ball ball)
-        {
-
         }
 
     }

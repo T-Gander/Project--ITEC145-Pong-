@@ -88,5 +88,21 @@ namespace graphics2
             double quarter = (ball.Height / 4)*3;
             return quarter + ball.Y;
         }
+        public double GetFirstQuarterX(Ball ball)
+        {
+            double quarter = ball.Width / 4;                                 //Functions to more accurately and easily comprehend math calcs for collision.
+            return quarter + ball.X;
+        }
+        public double GetCenterX(Ball ball)
+        {
+            double half = ball.Width / 2;
+            return half + ball.X;
+        }
+
+        public double GetThirdQuarterX(Ball ball)
+        {
+            double quarter = (ball.Width / 4) * 3;
+            return quarter + ball.X;
+        }
     }
 }

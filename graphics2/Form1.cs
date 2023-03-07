@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace graphics2
 {
     public partial class Form1 : Form
@@ -42,11 +44,51 @@ namespace graphics2
 
             paddle1.BallCollisionLeft(paddle1, ball);
             paddle2.BallCollisionRight(paddle2, ball);
-
-            //Add key commands here
-
+            
         }
 
-        
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Player 1
+            if (e.KeyCode == Keys.W)
+            {
+                paddle1.ySpeed = -5;
+            }
+            if (e.KeyCode == Keys.S)
+            {
+                paddle1.ySpeed = 5;
+            }
+            //Player 2
+            if (e.KeyCode == Keys.Up)
+            {
+                paddle2.ySpeed = -5;
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                paddle2.ySpeed = 5;
+            }
+        }
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            //Player 1
+            if (e.KeyCode == Keys.W)
+            {
+                paddle1.ySpeed = 0;
+            }
+            if (e.KeyCode == Keys.S)
+            {
+                paddle1.ySpeed = 0;
+            }
+            //Player 2
+            if (e.KeyCode == Keys.Up)
+            {
+                paddle2.ySpeed = 0;
+            }
+            if (e.KeyCode == Keys.Down)
+            {
+                paddle2.ySpeed = 0;
+            }
+        }
     }
 }
