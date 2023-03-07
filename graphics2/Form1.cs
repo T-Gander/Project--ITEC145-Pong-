@@ -182,7 +182,7 @@ namespace graphics2
                 ball.ySpeed = newSpeed;
                 count++;
 
-                if (count == 250)
+                if (count == 150)
                 {
                     Random random1 = new Random();
                     Random random2 = new Random();
