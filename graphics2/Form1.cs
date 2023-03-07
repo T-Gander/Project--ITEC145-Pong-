@@ -163,7 +163,7 @@ namespace graphics2
             }
             if (e.KeyCode == Keys.Down && Paddle2State != PaddleState.PaddleUp)
             {
-                Paddle1State = PaddleState.None;
+                Paddle2State = PaddleState.None;
             }
         }
 
