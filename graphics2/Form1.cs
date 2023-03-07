@@ -51,8 +51,8 @@ namespace graphics2
             paddle1.X = 30;
             paddle2.X = ClientSize.Width - 45;
 
-            paddle1.BallCollisionLeft(paddle1, ball);
-            paddle2.BallCollisionRight(paddle2, ball);
+            paddle1.BallCollisionPlayer1(paddle1, ball);
+            paddle2.BallCollisionPlayer2(paddle2, ball);
 
             if (ball.X + ball.Width > mainForm.ClientSize.Width)
             {

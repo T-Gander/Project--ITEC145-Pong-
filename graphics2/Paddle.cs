@@ -47,7 +47,7 @@ namespace graphics2
             gr.FillRectangle(_brush, _x, _y, _width, _height);
         }
 
-        public void BallCollisionLeft(Paddle paddle, Ball ball)
+        public void BallCollisionPlayer1(Paddle paddle, Ball ball)
         {
             if (ball.X <= paddle.X + paddle.Width && ball.GetCenterY(ball) >= paddle.Y && ball.GetCenterY(ball) <= paddle.Y + paddle.Height)
             {
@@ -76,7 +76,7 @@ namespace graphics2
             //    ball.Y = paddle.Y + ball.Height;
             //}
         }
-        public void BallCollisionRight(Paddle paddle, Ball ball)
+        public void BallCollisionPlayer2(Paddle paddle, Ball ball)
         {
             if (ball.X + ball.Width >= paddle.X && ball.GetCenterY(ball) >= paddle.Y && ball.GetCenterY(ball) <= paddle.Y + paddle.Height)
             {
