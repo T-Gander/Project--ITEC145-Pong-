@@ -125,7 +125,7 @@ namespace graphics2
                 {
                     finalSlice = maxSlice;
                 }
-                else if (finalSlice < -6)
+                else if (finalSlice < -6)                           
                 {
                     finalSlice = minSlice;
                 }
