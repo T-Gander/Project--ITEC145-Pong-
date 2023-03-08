@@ -66,6 +66,7 @@ namespace graphics2
                 else
                 {
                     ball.xSpeed *= -1;
+                    ball.ySpeed = Convert.ToInt32(Slice(paddle, ball));
                     ball.X += ball.xSpeed;
                 }
             }
@@ -84,26 +85,71 @@ namespace graphics2
                     {
                         ball.Y = paddle.Y + paddle.Height;
                     }
-                    ball.ySpeed*= -1;
+                    ball.ySpeed *= -1;
                 }
                 else
                 {
                     ball.xSpeed *= -1;
+                    ball.ySpeed = Convert.ToInt32(Slice(paddle, ball));
                     ball.X += ball.xSpeed;
                 }
             }
 
             
         }
-        public double GetCenterY(Paddle paddle)
+        public int GetCenterY(Paddle paddle)
         {
-            double half = paddle.Height / 2;
+            int half = paddle.Height / 2;
             return half + paddle.Y;
         }
-        public double GetCenterX(Paddle paddle)
+        public int GetCenterX(Paddle paddle)
         {
-            double half = paddle.Width / 2;
+            int half = paddle.Width / 2;
             return half + paddle.X;
+        }
+
+        public double Slice(Paddle paddle, Ball ball)
+        {
+            int maxSlice = 6;
+            int minSlice = -6;
+            double slice = 0;
+            double paddleRatio = paddle.Height/2;
+            double paddleTop = paddle.GetCenterY(paddle) - ball.GetCenterY(ball);
+            double paddleBottom = ball.GetCenterY(ball) - paddle.GetCenterY(paddle);
+
+            if (ball.GetCenterY(ball) < paddle.GetCenterY(paddle))
+            {
+                slice = paddleTop / paddleRatio;
+                double finalSlice = slice * maxSlice;
+                if (finalSlice > 6)
+                {
+                    finalSlice = maxSlice;
+                }
+                else if (finalSlice < -6)
+                {
+                    finalSlice = minSlice;
+                }
+                return -finalSlice;
+            }
+            else if (ball.GetCenterY(ball) > paddle.GetCenterY(paddle))
+            {
+                slice = paddleBottom / paddleRatio;
+                double finalSlice = slice * maxSlice;
+                if (finalSlice > 6)
+                {
+                    finalSlice = maxSlice;
+                }
+                else if (finalSlice < -6)
+                {
+                    finalSlice = minSlice;
+                }
+                return finalSlice;
+            }
+            else
+            {
+                return 0;
+            }
+            
         }
 
     }

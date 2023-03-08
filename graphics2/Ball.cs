@@ -60,35 +60,35 @@ namespace graphics2
             gr.FillEllipse(_brush, _x, _y, _width, _height);
         }
 
-        public double GetFirstQuarterY(Ball ball)
+        public int GetFirstQuarterY(Ball ball)
         {
-            double quarter = ball.Height / 4;                                 //Functions to more accurately and easily comprehend math calcs for collision.
+            int quarter = ball.Height / 4;                                 //Functions to more accurately and easily comprehend math calcs for collision.
             return quarter + ball.Y;
         }
-        public double GetCenterY(Ball ball)
+        public int GetCenterY(Ball ball)
         {
-            double half = ball.Height / 2;
+            int half = ball.Height / 2;
             return half + ball.Y;
         }
 
-        public double GetThirdQuarterY(Ball ball)
+        public int GetThirdQuarterY(Ball ball)
         {
-            double quarter = (ball.Height / 4)*3;
+            int quarter = (ball.Height / 4)*3;
             return quarter + ball.Y;
         }
-        public double GetFirstQuarterX(Ball ball)
+        public int GetFirstQuarterX(Ball ball)
         {
-            double quarter = ball.Width / 4;                                 //Functions to more accurately and easily comprehend math calcs for collision.
+            int quarter = ball.Width / 4;                                 //Functions to more accurately and easily comprehend math calcs for collision.
             return quarter + ball.X;
         }
-        public double GetCenterX(Ball ball)
+        public int GetCenterX(Ball ball)
         {
-            double half = ball.Width / 2;
+            int half = ball.Width / 2;
             return half + ball.X;
         }
-        public double GetThirdQuarterX(Ball ball)
+        public int GetThirdQuarterX(Ball ball)
         {
-            double quarter = (ball.Width / 4) * 3;
+            int quarter = (ball.Width / 4) * 3;
             return quarter + ball.X;
         }
         public void Reset(Ball ball)
