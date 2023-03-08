@@ -51,21 +51,21 @@ namespace graphics2
         {
             if (ball.X <= paddle.X + paddle.Width && ball.GetCenterY(ball) >= paddle.Y && ball.GetCenterY(ball) <= paddle.Y + paddle.Height)
             {
-                if (ball.GetCenterX(ball) <= paddle.X)
+                if (ball.GetCenterX(ball) <= paddle.X)                                  //Checks if X is too far behind paddle to be in front of it (based on an xSpeed of 6)
                 {
-                    if(ball.GetCenterY(ball) <= paddle.GetCenterY(paddle))
+                    if(ball.GetCenterY(ball) <= paddle.GetCenterY(paddle))              //Top of paddle condition
                     {
                         ball.Y = paddle.Y - ball.Height;
                     }
                     else
                     {
-                        ball.Y = paddle.Y + paddle.Height;
+                        ball.Y = paddle.Y + paddle.Height;                              //Bottom of paddle condition
                     }
                     ball.ySpeed *= -1;
                 }
                 else
                 {
-                    ball.xSpeed *= -1;
+                    ball.xSpeed *= -1;                                                  //In front of paddle
                     ball.ySpeed = Convert.ToInt32(Slice(paddle, ball));
                     ball.X += ball.xSpeed;
                 }
@@ -75,20 +75,20 @@ namespace graphics2
         {
             if (ball.X + ball.Width >= paddle.X && ball.GetCenterY(ball) >= paddle.Y && ball.GetCenterY(ball) <= paddle.Y + paddle.Height)
             {
-                if (ball.GetCenterX(ball) >= paddle.X)
+                if (ball.GetCenterX(ball) >= paddle.X)                                  //Checks if X is too far behind paddle to be in front of it (based on an xSpeed of 6)
                 {
-                    if (ball.GetCenterY(ball) <= paddle.GetCenterY(paddle))
+                    if (ball.GetCenterY(ball) <= paddle.GetCenterY(paddle))             //Top of paddle condition
                     {
                         ball.Y = paddle.Y - ball.Height;
                     }
                     else
                     {
-                        ball.Y = paddle.Y + paddle.Height;
+                        ball.Y = paddle.Y + paddle.Height;                              //Bottom of paddle condition
                     }
                     ball.ySpeed *= -1;
                 }
                 else
-                {
+                {                                                                       //In front of paddle
                     ball.xSpeed *= -1;
                     ball.ySpeed = Convert.ToInt32(Slice(paddle, ball));
                     ball.X += ball.xSpeed;
@@ -110,8 +110,8 @@ namespace graphics2
 
         public double Slice(Paddle paddle, Ball ball)
         {
-            int maxSlice = 12;
-            int minSlice = -12;
+            int maxSlice = 8;
+            int minSlice = -8;
             double slice = 0;
             double paddleRatio = paddle.Height/2;
             double paddleTop = paddle.GetCenterY(paddle) - ball.GetCenterY(ball);

@@ -93,7 +93,7 @@ namespace graphics2
         }
         public void Reset(Ball ball)
         {
-            ball.X = mainForm.ClientSize.Width / 2;
+            ball.X = mainForm.ClientSize.Width / 2;                    
             ball.Y = mainForm.ClientSize.Height / 2;
         }
     }

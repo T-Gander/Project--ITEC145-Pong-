@@ -47,7 +47,7 @@ namespace graphics2
             paddle1 = new Paddle(30, ClientSize.Height / 2 - 50);
             paddle2 = new Paddle(ClientSize.Width - 45, ClientSize.Height / 2 - 50);
             Iplayer1Score = new IScore((ClientSize.Width / 4) - 50, 50, "Player 1", player1Score);          //Theres a better way to line these up but it works good enough
-            Iplayer2Score = new IScore(((ClientSize.Width / 4)-25) * 3, 50, "Player 2", player2Score);
+            Iplayer2Score = new IScore(((ClientSize.Width / 4)-25) * 3, 50, "Player 2", player2Score);      //Also redundant location assignment as it gets redrawn via timer
         }
 
         private void Form1_Paint(object? sender, PaintEventArgs e)
