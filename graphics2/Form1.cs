@@ -96,7 +96,7 @@ namespace graphics2
 
             if (GameEnd == true)
             {
-                timerWait.Enabled = true;     //Sorry for this, I know it's bad programming... Also couldn't figure out why score won't refresh before the pause.ti
+                timerWait.Enabled = true;     
             }
 
             paddle1.X = 30;

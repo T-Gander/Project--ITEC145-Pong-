@@ -110,8 +110,8 @@ namespace graphics2
 
         public double Slice(Paddle paddle, Ball ball)
         {
-            int maxSlice = 8;
-            int minSlice = -8;
+            int maxSlice = 12;
+            int minSlice = -12;
             double slice = 0;
             double paddleRatio = paddle.Height/2;
             double paddleTop = paddle.GetCenterY(paddle) - ball.GetCenterY(ball);
